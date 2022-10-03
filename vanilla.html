@@ -17,24 +17,20 @@
 
 <script type="text/babel">
     const root = document.getElementById("root");
-    let counter = 0;
 
-    function countUp() {
-        counter++;
-        render();
-    };
-    function render() {
-        ReactDOM.render(<App/>, root);
-    };
     function App() {
-        return(
-            <div>
-                <h3>Total clicks : {counter}</h3>
-                <button onClick={countUp}>Click me</button>
-            </div>
-        );
+    const [counter, setCounter] = React.useState(0);
+    const onClick = () => {
+        setCounter(counter + 1);
     };
-    render();
+    return(
+        <div>
+            <h3>Total clicks : {counter}</h3>
+            <button onClick={onClick}>Click me</button>
+        </div>
+    );
+    };
+    ReactDOM.render(<App />, root);   
 
     // - 직접만든 컴포넌트의 이름은 대문자로 시작해줘야함 Title, Button..
     // - javascript 와 react 의 차이
