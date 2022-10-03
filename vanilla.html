@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>vanilla</title>
+</head>
+<body>
+    <!-- <span>Total Clicks : 0</span>
+    <button id="btn">Click me</button> -->
+    <div id="root"></div>
+</body>
+<script src="https://unpkg.com/react@18/umd/react.production.min.js" crossorigin></script>
+<script src="https://unpkg.com/react-dom@18/umd/react-dom.production.min.js" crossorigin></script>
+<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+<script type="text/babel">
+    const root = document.getElementById("root");
+    let counter = 0;
+
+    function countUp() {
+        counter++;
+        render();
+    };
+    function render() {
+        ReactDOM.render(<App/>, root);
+    };
+    function App() {
+        return(
+            <div>
+                <h3>Total clicks : {counter}</h3>
+                <button onClick={countUp}>Click me</button>
+            </div>
+        );
+    };
+    render();
+
+    // - 직접만든 컴포넌트의 이름은 대문자로 시작해줘야함 Title, Button..
+    // - javascript 와 react 의 차이
+    //   - 일반 javascript가 사용된 브라우저는 노드 정보가 바뀔때 마다
+    //     노드트리를 처음부터 다시 생성한다 (5단계에 걸쳐)
+    //   - 그러나 react 는 가상 DOM 을 생성하여 보이는 부분을 수정해주고
+    //     모든 업데이트가 끝나면 일괄로 합쳐서 실제 DOM에 정보를 전달한다.
+    //   - 변화가 일어난 부분 + 변화가 일어난 부분의 자식 컴포넌트까지 렌더링이 이루어진다.
+</script>
+</html>
