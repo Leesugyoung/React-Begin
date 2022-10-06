@@ -1,0 +1,5 @@
+/* create-react-app은 css코드를 javascript obj로 변환시켜줌 */
+.btn {
+    color:white;
+    background-color: tomato;
+}

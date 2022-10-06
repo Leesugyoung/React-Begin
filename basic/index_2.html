@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>vanilla</title>
+</head>
+<body>
+    <div id="root"></div>
+</body>
+<!-- React -->
+<script src=https://unpkg.com/react@17.0.2/umd/react.development.js></script>
+<!--  Prop Types -->
+<script src="https://unpkg.com/prop-types@15.7.2/prop-types.js"></script>
+<!-- React DOM -->
+<script src="https://unpkg.com/react-dom@17.0.2/umd/react-dom.production.min.js"></script>
+<!-- JSX 사용을 위한 Babel -->
+<script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+
+<script type="text/babel">
+    function Btn({ text, fontSize = 40, onclickStop }) {
+        // fontSize = 50 → fontsize가 별도 지정되지 않았을 경우 가지는 값(fontsize의 기본값)
+        return (
+            <button 
+                onClick={onclickStop}
+                style={{
+                    backgroundColor:"tomato",
+                    color:"white",
+                    padding:"10px 20px",
+                    border:0,
+                    borderRadius: 10,
+                    fontSize: fontSize,
+                }}
+            >
+            {text}
+        </button>
+        );
+    };
+    // const MemorizedBtn = React.memo(Btn)
+    // → props의 내용이 변경되지 않았다면,
+    // 상태가 변경되지 않은건 리렌더 되지 않도록 설정하는 기능
+
+    Btn.propTypes = {
+        // props 의 type 을 지정하는 기능
+        // bool, func, object, node ... 등 검사 가능
+        text: PropTypes.string.isRequired,
+        // isRequired : 컴포넌트에 필수로 있어야 한다고 알려주는 기능
+        fontSize : PropTypes.number,
+    }
+
+    function App() {
+        const [ContinueT, setContinueT] = React.useState("Continue");
+        const stopBtn = () => setContinueT("Stop!");
+
+        return(
+            <div>
+                <Btn text="Save Changes" fontSize={16} />
+                <Btn text={ContinueT} onclickStop={stopBtn} />
+            </div>
+        );
+    };
+    const root = document.getElementById("root");
+    ReactDOM.render(<App />, root);   
+
+</script>
+</html>
