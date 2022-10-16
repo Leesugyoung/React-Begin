@@ -15,7 +15,11 @@ function App() {
     // input 을 통해 작성한 toDo 와, 비어있는 array의 element가 더해지는 것
     setToDo("");
   };
-  console.log(toDos);
+  const deleteBtn = (index) => {
+    const li = index.target.parentElement;
+    li.remove();
+  };
+
   return (
     <div> 
       <h1>My To Dos ({toDos.length})</h1>
@@ -30,7 +34,10 @@ function App() {
       <hr />
       <ul>
         {toDos.map((item, index) => (
-          <li key={index}>{item}</li>
+          <li key={index}>
+            {item}
+            <button onClick={deleteBtn}>❌</button>
+          </li>
         ))}
       </ul>
     </div>
