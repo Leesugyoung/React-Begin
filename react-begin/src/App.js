@@ -1,47 +1,56 @@
 import { useState, useEffect } from "react";
 
 function App() {
-  // Create ~~ To do List 
-  const [toDo, setToDo] = useState("");
-  const [toDos, setToDos] = useState([]);
-  const onChange = (event) => setToDo(event.target.value);
-  const onSubmit = (event) => {
-    event.preventDefault();
-    if(toDo === "") {
-      return;
-    } 
-    setToDos((currentArray) => [toDo, ...currentArray]);
-    // 비어있는 currentArray 을 받아오고
-    // input 을 통해 작성한 toDo 와, 비어있는 array의 element가 더해지는 것
-    setToDo("");
+  // Coin Tracker practice
+  const [loading, setLoading] = useState(true);
+  const [coins, setCoins] = useState([]);
+  const [money, setMoney] = useState(0);
+  const onChange = (event) => {
+    setMoney(event.target.value);
   };
-  const deleteBtn = (index) => {
-    const li = index.target.parentElement;
-    li.remove();
-  };
+  useEffect(()=>{
+    fetch("https://api.coinpaprika.com/v1/tickers?limit=10")
+      .then((response) => response.json())
+      .then((json) => {
+        setCoins(json)
+        setLoading(false);
+      });
+  }, [])
 
   return (
-    <div> 
-      <h1>My To Dos ({toDos.length})</h1>
-      <form onSubmit={onSubmit}>
-        <input 
+    <div>
+      <h1>The Coins! {loading ? "" : `(${coins.length})`}</h1>
+      {loading ? 
+        ( <strong>Loading...</strong> 
+        ) : ( 
+          <select>
+            {coins.map((coin) => (
+                <option key={coin.id}> 
+                  {coin.name} ({coin.symbol}): {coin.quotes.USD.price} USD
+                </option>
+            ))}
+          </select> 
+        )}
+        <hr />
+        {/* // 코드챌린지
+        // 내가 가진 달러로 얼마만큼의 coin을 살 수 있을까? */}
+        <label>I have $
+        <input
+          placeholder="input your money"
           onChange={onChange}
-          value={toDo}
-          type="text" 
-          placeholder="Write your to do.."/>
-          <button>Add To Do</button>
-      </form>
-      <hr />
-      <ul>
-        {toDos.map((item, index) => (
-          <li key={index}>
-            {item}
-            <button onClick={deleteBtn}>❌</button>
-          </li>
-        ))}
-      </ul>
+          type="number"
+          value={money}
+        /> 
+        　→ </label>
+         <select>
+          {coins.map((coin) => (
+            <option>
+              {coin.name} ({coin.symbol}): You Can Buy {money / coin.quotes.USD.price}
+            </option>
+          ))}
+         </select>
     </div>
   )
-}
+};
 
 export default App;
