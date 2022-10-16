@@ -19,22 +19,11 @@ function App() {
 
   return (
     <div>
-      <h1>The Coins! {loading ? "" : `(${coins.length})`}</h1>
-      {loading ? 
-        ( <strong>Loading...</strong> 
-        ) : ( 
-          <select>
-            {coins.map((coin) => (
-                <option key={coin.id}> 
-                  {coin.name} ({coin.symbol}): {coin.quotes.USD.price} USD
-                </option>
-            ))}
-          </select> 
-        )}
+      <h1>The Coins Tracker!</h1>
         <hr />
         {/* // 코드챌린지
         // 내가 가진 달러로 얼마만큼의 coin을 살 수 있을까? */}
-        <label>I have $
+        <label>USD $
         <input
           placeholder="input your money"
           onChange={onChange}
@@ -45,7 +34,7 @@ function App() {
          <select>
           {coins.map((coin) => (
             <option>
-              {coin.name} ({coin.symbol}): You Can Buy {money / coin.quotes.USD.price}
+              {coin.name} ({coin.symbol}): You Can Buy {Math.round(money / coin.quotes.USD.price)}
             </option>
           ))}
          </select>
