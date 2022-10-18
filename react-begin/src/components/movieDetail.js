@@ -1,37 +1,35 @@
 import PropTypes from 'prop-types';
 
-function movieDetail({
-  id,
-  coverImg,
-  title,
-  year,
-  genres,
-  runtime,
-  rating,
-  like,
-}) {
+// 코드챌린지
+// 영화 디테일 페이지 제작
+function MovieDetail({ coverImg, title, year, genres, runtime, rating }) {
   return (
     <div>
-      <img src={coverImg} alt={title} />
-      <h2>{title}</h2>
-      <span>
-        {year} | {runtime}
-      </span>
+      {/* header */}
       <div>
-        <>{rating}</>
-        <>{like}</>
+        <p>{title}</p>
+        <p>{year}</p>
+        <div>{genres && genres.map((gen) => <p key={gen}>{gen}</p>)}</div>
+      </div>
+      {/* section_1*/}
+      <div>
+        <img src={coverImg} alt={title} />
+      </div>
+      <div>
+        <p>🕐 {runtime ? `${runtime} Minute` : 'None'}</p>
+        <p>⭐ {rating}</p>
       </div>
     </div>
   );
 }
 
-movieDetail.propTypes = {
-  id: PropTypes.number.isRequired,
+MovieDetail.propTypes = {
   coverImg: PropTypes.string.isRequired,
   title: PropTypes.string.isRequired,
   year: PropTypes.number.isRequired,
-  summary: PropTypes.string.isRequired,
   genres: PropTypes.arrayOf(PropTypes.string).isRequired,
+  runtime: PropTypes.number,
+  rating: PropTypes.number,
 };
 
-export default movieDetail;
+export default MovieDetail;
