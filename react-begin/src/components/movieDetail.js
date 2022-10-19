@@ -1,23 +1,44 @@
 import PropTypes from 'prop-types';
+import '../detailStyle.css';
 
 // 코드챌린지
 // 영화 디테일 페이지 제작
-function MovieDetail({ coverImg, title, year, genres, runtime, rating }) {
+function MovieDetail({
+  coverImg,
+  title,
+  year,
+  genres,
+  runtime,
+  rating,
+  desc,
+  backImg,
+}) {
   return (
-    <div>
+    <div className="deatil_container">
       {/* header */}
-      <div>
-        <p>{title}</p>
-        <p>{year}</p>
-        <div>{genres && genres.map((gen) => <p key={gen}>{gen}</p>)}</div>
-      </div>
-      {/* section_1*/}
-      <div>
-        <img src={coverImg} alt={title} />
-      </div>
-      <div>
-        <p>🕐 {runtime ? `${runtime} Minute` : 'None'}</p>
-        <p>⭐ {rating}</p>
+      <div className="detail_back">
+        <img className="backImg" src={backImg} />
+        {/* section_*/}
+        <div className="detail_cover">
+          <img src={coverImg} alt={coverImg} />
+          <div>
+            <div className="detail_title">
+              {title} ({year})
+            </div>
+            <div>
+              {genres &&
+                genres.map((gen) => (
+                  <p className="detail_gen" key={gen}>
+                    {gen}
+                  </p>
+                ))}
+            </div>
+            <p className="detail_run">
+              🕐 {runtime ? `${runtime} Minute` : 'None'} | ⭐ {rating}
+            </p>
+            <div className="detail_desc">{desc}</div>
+          </div>
+        </div>
       </div>
     </div>
   );

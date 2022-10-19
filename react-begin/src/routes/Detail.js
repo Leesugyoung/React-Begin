@@ -1,6 +1,7 @@
 import { useState, useEffect, useCallback } from 'react';
 import { useParams } from 'react-router-dom';
 import MovieDetail from '../components/MovieDetail';
+import LoadingH1 from '../components/Lodiang';
 
 function Detail() {
   const [loading, setLoading] = useState(true);
@@ -15,18 +16,18 @@ function Detail() {
     setDetail(json.data.movie);
     setLoading(false);
   }, [id]);
-
+  console.log(detail);
   useEffect(() => {
     getMovies();
   }, [getMovies]);
 
   // 코드챌린지
-  // home 에서 해줬던 loading 추가 ㅇ
+  // home 에서 해줬던 loading 추가
   // movie 를 state 에 추가(api에서 json을 받아와서 아무것도 안하고있는 상태)
   return (
     <div>
       {loading ? (
-        <h1>Loaidng...</h1>
+        <LoadingH1 />
       ) : (
         <div>
           <MovieDetail
@@ -38,6 +39,8 @@ function Detail() {
             genres={detail.genres}
             runtime={detail.runtime}
             rating={detail.rating}
+            desc={detail.description_full}
+            backImg={detail.background_image}
           />
         </div>
       )}

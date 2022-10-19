@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import Movie from '../components/Movie';
+import LoadingH1 from '../components/Lodiang';
 
 function Home() {
   // Movie App
@@ -22,19 +23,19 @@ function Home() {
   return (
     <div>
       {loading ? (
-        <h1>Loaidng...</h1>
+        <LoadingH1 />
       ) : (
-        <div>
+        <div className="container">
           {movies.map((movie) => (
             <Movie
               key={movie.id}
-              // → map 안에서 component render 시 사용
               id={movie.id}
               coverImg={movie.medium_cover_image}
               title={movie.title}
               year={movie.year}
-              summary={movie.summary}
               genres={movie.genres}
+              rating={movie.rating}
+              runtime={movie.runtime}
             />
           ))}
         </div>
