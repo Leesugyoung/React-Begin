@@ -1,5 +1,5 @@
 # React-Begin
-First Step!💪
+React. First Step!💪
 
 ---
 
@@ -9,5 +9,3 @@ The first "Movie app" site that I made with React!
 https://leesugyoung.github.io/React-Begin/
 
 ---
-
-
